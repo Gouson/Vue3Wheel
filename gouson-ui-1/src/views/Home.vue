@@ -4,9 +4,9 @@
     <div class="banner">
       <h1>ui</h1>
       <h2>厉害ui</h2>
-      <p>
-        <a href>gihub</a>
-        <a href>start</a>
+      <p class="actions">
+        <a href="https://github.com/gouson">gihub</a>
+        <router-link to="/Doc">start</router-link>
       </p>
     </div>
   </div>
