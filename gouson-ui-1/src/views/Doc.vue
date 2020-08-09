@@ -50,7 +50,7 @@ export default {
     padding-top: 60px;
     padding-left: 156px;
     @media (max-width: 500px) {
-      padding-left: 0;
+      padding-left: 0; 
     }
   }
 }
@@ -62,7 +62,7 @@ export default {
   > main {
     flex-grow: 1;
     padding: 16px;
-    background: lightgreen;
+    background: white;
   }
 }
 aside {

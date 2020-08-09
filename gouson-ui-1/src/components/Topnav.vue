@@ -22,15 +22,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .topnav {
+  background: pink;
+  display: flex;
+  padding: 16px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
-  background: pink;
-  display: flex;
   justify-content: center;
-  padding: 16px;
+  align-items: center;
   > .logo {
     max-width: 6em;
     margin-right: auto;
@@ -46,7 +47,7 @@ export default {
   > .toggleAside {
     width: 24px;
     height: 24px;
-    background: orange;
+    background: red;
     position: absolute;
     left: 16px;
     top: 50%;
