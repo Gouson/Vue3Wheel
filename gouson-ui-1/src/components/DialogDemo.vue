@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div>实例1</div>
+    <div>示例1</div>
     <Button @click="toggle">Toggle</Button>
     <Dialog v-model:visiable="x" :closeOnClickOverlay="true" :ok="f1" :cancel="f2">
         <template v-slot:content>
@@ -11,6 +11,9 @@
             <Strong>加粗的标题</Strong>
         </template>
     </Dialog>
+
+    <div>示例2</div>
+    <Button @click="showDialog">show</Button>
 </div>
 </template>
 
@@ -20,6 +23,10 @@ import Button from "../lib/Button.vue";
 import {
     ref
 } from "vue";
+import {
+    openDialog
+}
+from "../lib/openDialog";
 export default {
     components: {
         Dialog,
@@ -36,11 +43,25 @@ export default {
         const f2 = () => {
             return true;
         };
+        const showDialog = () => {
+            console.log(1)
+            openDialog({
+                title: '标题1',
+                content: '你好1',
+                ok: () => {
+                    console.log('ok')
+                },
+                cancel: () => {
+                    console.log('cancel')
+                }
+            })
+        }
         return {
             x,
             toggle,
             f1,
             f2,
+            showDialog
         };
     },
 };
