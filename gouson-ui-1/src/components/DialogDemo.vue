@@ -2,7 +2,9 @@
 <div>
     <div>示例1</div>
     <Button @click="toggle">Toggle</Button>
+     <!-- eslint-disable-line vue/no-v-model-argument -->
     <Dialog v-model:visiable="x" :closeOnClickOverlay="true" :ok="f1" :cancel="f2">
+        
         <template v-slot:content>
             <h1>h1</h1>
             <h2>h2</h2>
