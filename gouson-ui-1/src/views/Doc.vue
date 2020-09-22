@@ -1,8 +1,20 @@
 <template>
   <div class="layout">
-    <Topnav class="nav" />
+    <Topnav class="nav" toggleMenuButtonVisible />
     <div class="content">
       <aside v-if="menuVisible">
+        <h2>文档</h2>
+        <ol>
+          <li>
+            <router-link to="/doc/intro">介绍</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/install">安装</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/get-started">开始使用</router-link>
+          </li>
+        </ol>
         <h2>组件列表</h2>
         <ol>
           <li>
@@ -50,7 +62,7 @@ export default {
     padding-top: 60px;
     padding-left: 156px;
     @media (max-width: 500px) {
-      padding-left: 0; 
+      padding-left: 0;
     }
   }
 }
@@ -74,6 +86,7 @@ aside {
   left: 0;
   padding-top: 70px;
   height: 100%;
+  z-index: 9;
   > h2 {
     margin-bottom: 4px;
   }
