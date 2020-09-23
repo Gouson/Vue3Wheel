@@ -4,38 +4,41 @@
     <div class="demo">
       <h2>常规用法</h2>
       <div class="demo-component">
-        <component :is="Switch1Demo"/>
+        <component :is="Switch1Demo" />
       </div>
       <div class="demo-actions">
         <Button>查看代码</Button>
       </div>
       <div class="demo-code">
-        <pre>{{Switch1Demo.__sourceCode}}
+        <pre class="language-html" v-html="Prism.highlight(Switch1Demo.__sourceCode,Prism.languages.html,'html')">
         </pre>
       </div>
     </div>
     <div class="demo">
       <h2>支持 disabled</h2>
       <div class="demo-component">
-        <component :is="Switch2Demo"/>
+        <component :is="Switch2Demo" />
       </div>
       <div class="demo-actions">
         <Button>查看代码</Button>
       </div>
       <div class="demo-code">
-        <pre>{{Switch2Demo.__sourceCode}}
+        <pre class="language-html" v-html="Prism.highlight(Switch2Demo.__sourceCode,Prism.languages.html,'html')">
         </pre>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang='ts'>
+import { ref } from "vue";
 import Switch from "../lib/Switch.vue";
 import Button from "../lib/Button.vue";
 import Switch1Demo from "../components/Switch1.demo.vue";
 import Switch2Demo from "../components/Switch2.demo.vue";
-import { ref } from "vue";
+import "prismjs";
+import 'prismjs/themes/prism.css'
+const Prism=(window as any).Prism
 export default {
   components: {
     Switch,
@@ -47,6 +50,7 @@ export default {
       bool,
       Switch1Demo,
       Switch2Demo,
+      Prism
     };
   },
 };
