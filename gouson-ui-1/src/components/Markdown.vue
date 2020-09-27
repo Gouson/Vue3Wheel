@@ -6,19 +6,23 @@
 import { ref } from 'vue';
 export default {
   props: {
-    path: {
+    // path: {
+    //   type: String,
+    //   required: true,
+    // },
+     content: {
       type: String,
       required: true,
     },
   },
-  setup(props){
-      const content=ref<String>(null)
-      import(props.path).then(result=>{
-          content.value=result.default
-      })
+  // setup(props){
+  //     const content=ref<String>(null)
+  //     import(props.path).then(result=>{
+  //         content.value=result.default
+  //     })
 
-      return {content}
-  },
+  //     return {content}
+  // },
 };
 </script>
 <style>
