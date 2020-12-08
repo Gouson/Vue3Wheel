@@ -1,76 +1,77 @@
 <template>
-<template v-if="visiable">
+  <template v-if="visible">
     <Teleport to="body">
-        <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
-        <div class="gulu-dialog-wrapper">
-            <div class="gulu-dialog">
-                <header>
-                    <slot name="title" />
-                    <span class="gulu-dialog-close" @click="close"></span>
-                </header>
-                <main>
-                    <slot name="content" />
-                </main>
-                <footer>
-                    <Button level="main" @click="ok">OK</Button>
-                    <Button @click="cancel">Cancel</Button>
-                </footer>
-            </div>
+      <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
+      <div class="gulu-dialog-wrapper">
+        <div class="gulu-dialog">
+          <header>
+            <slot name="title" />
+            <span class="gulu-dialog-close" @click="close"></span>
+          </header>
+          <main>
+            <slot name="content" />
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
         </div>
+      </div>
     </Teleport>
-</template>
+  </template>
 </template>
 
 <script lang="ts">
 import Button from "./Button.vue";
 export default {
-    props: {
-        visiable: {
-            type: Boolean,
-            default: false,
-        },
-        closeOnClickOverlay: {
-            type: Boolean,
-            default: true,
-        },
-        ok: {
-            type: Function,
-        },
-        cancel: {
-            type: Function,
-        },
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
     },
-    components: {
-        Button,
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true,
     },
-    setup(props, context) {
-        const close = () => {
-            context.emit("update:visiable", false);
-        };
-        const onClickOverlay = () => {
-            if (props.closeOnClickOverlay) {
-                close();
-            }
-        };
-        const ok = () => {
-            if (props.ok?.() !== false) {
-                close();
-            }
-        };
-        const cancel = () => {
-            // if (props.cancel?.() !== false) {
-            //     close();
-            // }
-            props.cancel?.()
-            close()
-        };
-        return {
-            close,
-            onClickOverlay,
-            ok,
-            cancel,
-        };
+    ok: {
+      type: Function,
     },
+    cancel: {
+      type: Function,
+    },
+  },
+  components: {
+    Button,
+  },
+  setup(props, context) {
+    const close = () => {
+      context.emit("update:visible", false);
+    };
+    const onClickOverlay = () => {
+      if (props.closeOnClickOverlay) {
+        close();
+      }
+    };
+    const ok = () => {
+      if (props.ok?.() !== false) {
+        close();
+      }
+    };
+    const cancel = () => {
+      // if (props.cancel?.() !== false) {
+      //     close();
+      // }
+      props.cancel?.();
+      close();
+    };
+    return {
+      close,
+      onClickOverlay,
+      ok,
+      cancel,
+      console:window.console
+    };
+  },
 };
 </script>
 
@@ -79,74 +80,74 @@ $radius: 4px;
 $border-color: #d9d9d9;
 
 .gulu-dialog {
-    background: white;
-    border-radius: $radius;
-    box-shadow: 0 0 3px fade_out(black, 0.5);
-    min-width: 15em;
-    max-width: 90%;
+  background: white;
+  border-radius: $radius;
+  box-shadow: 0 0 3px fade_out(black, 0.5);
+  min-width: 15em;
+  max-width: 90%;
 
-    &-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: fade-out($color: black, $amount: 0.5);
-        z-index: 10;
+  &-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: fade-out($color: black, $amount: 0.5);
+    z-index: 10;
+  }
+
+  &-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+  }
+
+  > header {
+    padding: 12px 16px;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  > main {
+    padding: 12px 16px;
+  }
+
+  > footer {
+    border-top: $border-color 1px solid;
+    padding: 12px 16px;
+    text-align: right;
+  }
+
+  &-close {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      background: black;
+      width: 100%;
+      top: 50%;
+      left: 50%;
     }
 
-    &-wrapper {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 11;
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
 
-    >header {
-        padding: 12px 16px;
-        border-bottom: 1px solid $border-color;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 20px;
+    &::after {
+      transform: translate(-50%, -50%) rotate(45deg);
     }
-
-    >main {
-        padding: 12px 16px;
-    }
-
-    >footer {
-        border-top: $border-color 1px solid;
-        padding: 12px 16px;
-        text-align: right;
-    }
-
-    &-close {
-        position: relative;
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        cursor: pointer;
-
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            height: 1px;
-            background: black;
-            width: 100%;
-            top: 50%;
-            left: 50%;
-        }
-
-        &::before {
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        &::after {
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
-    }
+  }
 }
 </style>

@@ -9,8 +9,8 @@ export const openDialog=(options)=>{
         div.remove()
     }
     const app =createApp({render(){
-        return h(Dialog,{visiable:true,
-        'onUpdate:visiable':(newvalue)=>{
+        return h(Dialog,{visible:true,
+        'onUpdate:visible':(newvalue)=>{
             if(newvalue ===false){
               close()
             }
